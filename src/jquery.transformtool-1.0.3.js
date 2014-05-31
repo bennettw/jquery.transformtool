@@ -1,5 +1,7 @@
 /**
- * This file contains the jQuery.transformTool v1.0.2 plugin.
+ * This file contains the jQuery.transformTool v1.0.3 plugin ported to KineticJS 5.1.0.
+ *
+ * Original author:
  * 
  * @author   Gonzalo Chumillas <gonzalo@soloproyectos.com>
  * @license  https://raw.github.com/soloproyectos/transformtool/master/LICENSE BSD 2-Clause License
