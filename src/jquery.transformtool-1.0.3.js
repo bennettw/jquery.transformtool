@@ -628,8 +628,8 @@
 
         // creates a new rotation group centered in the target
         var rotateGroup = new Kinetic.Group({
-            x: target.x(),
-            y: target.y()
+            x: target.x() + target.width() / 2,
+            y: target.y() + target.height() / 2
         });
         parent.add(rotateGroup);
 
@@ -641,8 +641,8 @@
         // when the rotation group rotates, the target rotates also around its center
         target.position({x: 0, y: 0});
         rotateGroup.offset({
-            x: rotateGroup.width() / 2,
-            y: rotateGroup.height() / 2
+            x: target.width() / 2,
+            y: target.height() / 2
         });
 
         window.parent = parent;
@@ -661,10 +661,12 @@
         console.log(rotateGroup.position());
         console.log(rotateGroup.width());
         console.log(rotateGroup.height());
+        console.log(rotateGroup.offset());
         console.log("target dimensions");
         console.log(target.position());
         console.log(target.width());
         console.log(target.height());
+        console.log(target.offset());
 
         return tool;
     }
