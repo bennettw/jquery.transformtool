@@ -5,10 +5,10 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script type="text/javascript" src="../lib/jquery-1.7.2.min.js"></script>
     <script type="text/javascript" src="../lib/jquery.timer-1.0.3.js"></script>
-    <!--<script type="text/javascript" src="../lib/kinetic-v5.1.0.min.js"></script>-->
-    <script type="text/javascript" src="../lib/kinetic-v4.7.4.min.js"></script>
-    <!--<script type="text/javascript" src="../src/jquery.transformtool-1.0.3.js"></script>-->
-    <script type="text/javascript" src="../lib/jquery.transformtool-1.0.2.js"></script>
+    <script type="text/javascript" src="../lib/kinetic-v5.1.0.min.js"></script>
+    <!--<script type="text/javascript" src="../lib/kinetic-v4.7.4.min.js"></script>-->
+    <script type="text/javascript" src="../src/jquery.transformtool-1.0.3.js"></script>
+    <!--<script type="text/javascript" src="../lib/jquery.transformtool-1.0.2.js"></script>-->
     <script type="text/javascript">
         function writeMessage(canvas, message) {
 //            var context = canvas.getContext('2d');
@@ -47,15 +47,15 @@
             });
             _layer.add(rect1);
             
-            var rect2 = new Kinetic.Rect({
-                x: 300,
-                y: 250,
-                width: 200,
-                height: 80,
-                fill: 'green',
-                stroke: 'black'
-            });
-            _layer.add(rect2);
+//            var rect2 = new Kinetic.Rect({
+//                x: 300,
+//                y: 250,
+//                width: 200,
+//                height: 80,
+//                fill: 'green',
+//                stroke: 'black'
+//            });
+//            _layer.add(rect2);
             
             _stage.add(_layer);
             _stage.draw();
@@ -66,21 +66,23 @@
                 'handler-fill': 'gray',
                 'border-stroke': '#333333'
             });
-            
+
+//            rotateGroup.rotation(90);
+
             // creates a transform tool for the second rectangle
-            $(rect2).transformTool({
-                'allow-scale': false
-            });
-            
-            // hides or shows transform tool 1
-            $('#toggle1').click(function() {
-                $(rect1).transformTool('toggle');
-            });
-            
-            // hides or shows transform tool 2
-            $('#toggle2').click(function() {
-                $(rect2).transformTool('toggle');
-            });
+//            $(rect2).transformTool({
+//                'allow-scale': false
+//            });
+//
+//            // hides or shows transform tool 1
+//            $('#toggle1').click(function() {
+//                $(rect1).transformTool('toggle');
+//            });
+//
+//            // hides or shows transform tool 2
+//            $('#toggle2').click(function() {
+//                $(rect2).transformTool('toggle');
+//            });
 
             var canvas = $('canvas')[0];
             var context = canvas.getContext('2d');
