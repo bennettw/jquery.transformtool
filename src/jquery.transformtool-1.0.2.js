@@ -7,6 +7,11 @@
  */
 (function($) {
     /**
+     * Configure Kinetic to use radians
+     */
+    Kinetic.angleDeg = false;
+
+    /**
      * Namespace.
      */
     var namespace = 'transformTool';
@@ -124,7 +129,7 @@
         
         // makes the group draggable
         var rotateGroup = this._target.getParent();
-        rotateGroup.setDraggable(this._options['allow-move']);
+        rotateGroup.draggable(this._options['allow-move']);
         
         this.createBorder();
         
@@ -258,13 +263,13 @@
                     var v = {x: p.x - pos.x, y: p.y - pos.y};
                     var angle = self.getAngle(v);
                     
-                    rotateGroup.setRotation(angle);
+                    rotateGroup.rotation(angle);
                 }
                 
                 return pos;
             }
         });
-        this._rotateHandler.setVisible(this._options['allow-rotate']);
+        this._rotateHandler.visible(this._options['allow-rotate']);
         this._rotateHandler.on('dragmove', function() {
             self.update();
         });
@@ -294,10 +299,10 @@
         );
         var boundaryLine = {point: {x: 0, y: 0}, vector: {x: 0, y: 0}};
         
-        handler.setVisible(visible);
+        handler.visible(visible);
         
         // the dragging is restricted to the points of the boundary line
-        handler.setDragBoundFunc(function (pos) {
+        handler.dragBoundFunc(function (pos) {
             if (this.isDragging()) {
                 pos = self.getNearestPoint(boundaryLine, pos);
             }
@@ -338,13 +343,13 @@
      * @return {Void}
      */
     TransformToolGroup.prototype.apply = function () {
-        var pos = this._selectedHandled.getPosition();
+        var pos = this._selectedHandled.position();
         var align = this._selectedHandled.getAlign();
-        var width = align[0] != 0? Math.abs(2 * pos.x) : this._target.getWidth();
-        var height = align[1] != 0? Math.abs(2 * pos.y) : this._target.getHeight();
+        var width = align[0] != 0? Math.abs(2 * pos.x) : this._target.width();
+        var height = align[1] != 0? Math.abs(2 * pos.y) : this._target.height();
         
-        this._target.setSize(width, height);
-        this._target.setOffset(width / 2, height / 2);
+        this._target.size(width, height);
+        this._target.offset(width / 2, height / 2);
     };
     
     /**
@@ -391,10 +396,10 @@
      */
     TransformToolGroup.prototype.update = function () {
         // target properties
-        var targetX = this._target.getX() - this._target.getOffsetX();
-        var targetY = this._target.getY() - this._target.getOffsetY();
-        var targetWidth = this._target.getWidth();
-        var targetHeight = this._target.getHeight();
+        var targetX = this._target.x() - this._target.offsetX();
+        var targetY = this._target.y() - this._target.offsetY();
+        var targetWidth = this._target.width();
+        var targetHeight = this._target.height();
         
         // positions
         var rotate = {
@@ -426,55 +431,55 @@
         
         
         // sets rotate handler position
-        this._rotateHandler.setPosition(rotate);
+        this._rotateHandler.position(rotate);
         
         // sets left-top handler position
         this.getHandlerByAlign(
             TransformToolGroup.LEFT,
             TransformToolGroup.TOP
-        ).setPosition(leftTop);
+        ).position(leftTop);
         
         // sets right-top handler position
         this.getHandlerByAlign(
             TransformToolGroup.RIGHT,
             TransformToolGroup.TOP
-        ).setPosition(rightTop);
+        ).position(rightTop);
         
         // sets left-bottom handler position
         this.getHandlerByAlign(
             TransformToolGroup.LEFT,
             TransformToolGroup.BOTTOM
-        ).setPosition(leftBottom);
+        ).position(leftBottom);
         
         // sets right-bottom handler position
         this.getHandlerByAlign(
             TransformToolGroup.RIGHT,
             TransformToolGroup.BOTTOM
-        ).setPosition(rightBottom);
+        ).position(rightBottom);
         
         // sets center-top handler position
         this.getHandlerByAlign(
             TransformToolGroup.CENTER,
             TransformToolGroup.TOP
-        ).setPosition(centerTop);
+        ).position(centerTop);
         
         // sets left-middle handler position
         this.getHandlerByAlign(
             TransformToolGroup.LEFT,
             TransformToolGroup.MIDDLE
-        ).setPosition(leftMiddle);
+        ).position(leftMiddle);
         
         // sets right-middle handler position
         this.getHandlerByAlign(
             TransformToolGroup.RIGHT,
             TransformToolGroup.MIDDLE
-        ).setPosition(rightMiddle);
+        ).position(rightMiddle);
         
         // sets center-bottom handler position
         this.getHandlerByAlign(
             TransformToolGroup.CENTER,
             TransformToolGroup.BOTTOM
-        ).setPosition(centerBottom);
+        ).position(centerBottom);
     };
     
     /**
@@ -532,7 +537,7 @@
             var stage = target.getStage();
             var rotateGroup = target.getParent();
             
-            rotateGroup.setDraggable(true);
+            rotateGroup.draggable(true);
             tool.show();
             stage.draw();
         });
@@ -551,7 +556,7 @@
             var stage = target.getStage();
             var rotateGroup = target.getParent();
             
-            rotateGroup.setDraggable(false);
+            rotateGroup.draggable(false);
             tool.hide();
             stage.draw();
         });
@@ -612,8 +617,8 @@
         
         // creates a new rotation group centered in the target
         var rotateGroup = new Kinetic.Group({
-            x: target.getX() + target.getWidth() / 2,
-            y: target.getY() + target.getHeight() / 2
+            x: target.x() + target.width() / 2,
+            y: target.y() + target.height() / 2
         });
         parent.add(rotateGroup);
         
@@ -623,10 +628,10 @@
         
         // places the target at the center of the rotation group
         // when the rotation group rotates, the target rotates also around its center
-        target.setPosition(0, 0);
-        target.setOffset({
-            x: target.getWidth() / 2,
-            y: target.getHeight() / 2
+        target.position(0, 0);
+        target.offset({
+            x: target.width() / 2,
+            y: target.height() / 2
         });
         
         // creates a new transform tool group
