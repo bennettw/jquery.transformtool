@@ -260,14 +260,16 @@
             draggable: true,
             dragBoundFunc: function(pos) {
                 if (this.isDragging()) {
+                    var rotateGroup = self.getParent();
+                    var targetWidth = rotateGroup.width();
+                    var targetHeight = rotateGroup.height();
+
                     console.log("pos");
                     console.log(pos);
-                    var rotateGroup = self.getParent();
-//                    debugger;
                     var p = rotateGroup.position();
                     console.log("absolute position");
                     console.log(p);
-                    var v = {x: p.x - pos.x, y: p.y - pos.y};
+                    var v = {x: p.x - targetWidth / 2 - pos.x, y: p.y - targetHeight / 2- pos.y};
                     console.log("vector");
                     console.log(v);
                     var angle = self.getAngle(v);
@@ -416,17 +418,17 @@
         
         // positions
         var rotate = {
-                x: targetX + targetWidth / 2,
-                y: targetY - this._options['rotate-distance']
+                x: targetX,
+                y: targetY - targetHeight / 2 - this._options['rotate-distance']
         };
-        var leftTop = {x: targetX, y: targetY};
-        var rightTop = {x: targetX + targetWidth, y: targetY};
-        var leftBottom = {x: targetX, y: targetY + targetHeight};
-        var rightBottom = {x: targetX + targetWidth, y: targetY + targetHeight};
-        var centerTop = {x: targetX + targetWidth / 2, y: targetY};
-        var leftMiddle = {x: targetX, y: targetY + targetHeight / 2};
-        var rightMiddle = {x: targetX + targetWidth, y: targetY + targetHeight / 2};
-        var centerBottom = {x: targetX + targetWidth / 2, y: targetY + targetHeight};
+        var leftTop = {x: targetX - targetWidth / 2, y: targetY - targetHeight / 2};
+        var rightTop = {x: targetX + targetWidth / 2, y: targetY - targetHeight / 2};
+        var leftBottom = {x: targetX - targetWidth / 2, y: targetY + targetHeight / 2};
+        var rightBottom = {x: targetX + targetWidth / 2, y: targetY + targetHeight / 2};
+        var centerTop = {x: targetX, y: targetY - targetHeight / 2};
+        var leftMiddle = {x: targetX - targetWidth / 2, y: targetY};
+        var rightMiddle = {x: targetX + targetWidth / 2, y: targetY};
+        var centerBottom = {x: targetX, y: targetY + targetHeight / 2};
         
         // adds points to the border
         var points = [
@@ -629,9 +631,12 @@
         var parent = target.getParent();
 
         // creates a new rotation group centered in the target
+        // doesn't it depend on if the target is positioned by center or top left already? assume center now
         var rotateGroup = new Kinetic.Group({
             x: target.x() + target.width() / 2,
-            y: target.y() + target.height() / 2
+            y: target.y() + target.height() / 2,
+            width: target.width(),
+            height: target.height()
         });
         parent.add(rotateGroup);
 
