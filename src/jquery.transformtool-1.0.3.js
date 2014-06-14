@@ -263,7 +263,6 @@
                     var rotateGroup = self.getParent();
                     var targetWidth = rotateGroup.width();
                     var targetHeight = rotateGroup.height();
-
                     console.log("pos");
                     console.log(pos);
                     var p = rotateGroup.position();
@@ -411,11 +410,12 @@
     TransformToolGroup.prototype.update = function () {
 //        debugger
         // target properties
-        var targetX = this._target.x() - this._target.offsetX();
-        var targetY = this._target.y() - this._target.offsetY();
+        var targetX = this._target.x();
+        var targetY = this._target.y();
         var targetWidth = this._target.width();
         var targetHeight = this._target.height();
-        
+
+
         // positions
         var rotate = {
                 x: targetX,
@@ -647,10 +647,13 @@
         // places the target at the center of the rotation group
         // when the rotation group rotates, the target rotates also around its center
         target.position({x: 0, y: 0});
-        rotateGroup.offset({
+		
+        //rotateGroup.offset({
+        target.offset({
             x: target.width() / 2,
             y: target.height() / 2
         });
+		
 
         window.parent = parent;
         // creates a new transform tool group
@@ -665,15 +668,15 @@
         parent.draw();
 
         console.log("group dimensions");
-        console.log(rotateGroup.position());
-        console.log(rotateGroup.width());
-        console.log(rotateGroup.height());
-        console.log(rotateGroup.offset());
+        console.log("pos: " + rotateGroup.position().x + ", " + rotateGroup.position().y);
+        console.log("width: " + rotateGroup.width());
+        console.log("height: " + rotateGroup.height());
+        console.log("offset: " + rotateGroup.offset().x + ", " + rotateGroup.offset().y);
         console.log("target dimensions");
-        console.log(target.position());
-        console.log(target.width());
-        console.log(target.height());
-        console.log(target.offset());
+        console.log("pos: " + target.position().x + ", " + target.position().y);
+        console.log("width: " + target.width());
+        console.log("height: " + target.height());
+        console.log("offset: " + target.offset().x + ", " + target.offset().y);
 
         return tool;
     }
