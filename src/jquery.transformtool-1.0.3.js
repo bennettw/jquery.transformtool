@@ -263,17 +263,9 @@
                     var rotateGroup = self.getParent();
                     var targetWidth = rotateGroup.width();
                     var targetHeight = rotateGroup.height();
-                    console.log("pos");
-                    console.log(pos);
                     var p = rotateGroup.position();
-                    console.log("absolute position");
-                    console.log(p);
-                    var v = {x: p.x - targetWidth / 2 - pos.x, y: p.y - targetHeight / 2- pos.y};
-                    console.log("vector");
-                    console.log(v);
+                    var v = {x: p.x - pos.x, y: p.y - pos.y};
                     var angle = self.getAngle(v);
-                    console.log("angle");
-                    console.log(angle * 180/Math.PI);
 
                     rotateGroup.rotation(angle);
 //                    debugger
@@ -648,7 +640,6 @@
         // when the rotation group rotates, the target rotates also around its center
         target.position({x: 0, y: 0});
 		
-        //rotateGroup.offset({
         target.offset({
             x: target.width() / 2,
             y: target.height() / 2
@@ -666,17 +657,6 @@
         
         // update the parent
         parent.draw();
-
-        console.log("group dimensions");
-        console.log("pos: " + rotateGroup.position().x + ", " + rotateGroup.position().y);
-        console.log("width: " + rotateGroup.width());
-        console.log("height: " + rotateGroup.height());
-        console.log("offset: " + rotateGroup.offset().x + ", " + rotateGroup.offset().y);
-        console.log("target dimensions");
-        console.log("pos: " + target.position().x + ", " + target.position().y);
-        console.log("width: " + target.width());
-        console.log("height: " + target.height());
-        console.log("offset: " + target.offset().x + ", " + target.offset().y);
 
         return tool;
     }
