@@ -357,6 +357,10 @@
         if (this._target.children) {
             this._target.children.forEach(function(child) {
                 child.size({width: width, height: height});
+
+                if (child.outerRadius) {
+                    child.outerRadius(width / 2);
+                }
             });
         }
         this._target.offset({ x: width / 2, y: height / 2});
